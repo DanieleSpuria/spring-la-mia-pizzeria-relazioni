@@ -2,6 +2,7 @@ package org.java.app.db.pojo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,16 +17,17 @@ public class Offerta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumn(nullable = false)
+	@Column(nullable = false)
 	private LocalDate inizio;
 
-	@JoinColumn(nullable = false)
+	@Column(nullable = false)
 	private LocalDate fine;
 
-	@JoinColumn(nullable = false)
+	@Column(nullable = false)
 	private String titolo;
 	
 	@ManyToOne
+	@JoinColumn(nullable = false)
 	private Pizza pizza;
 	
 	public Offerta() {}
@@ -62,7 +64,7 @@ public class Offerta {
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
-	public Pizza getPizza(Pizza pizza) {
+	public Pizza getPizza() {
 		return pizza;
 	}
 	public void setPizza(Pizza pizza) {

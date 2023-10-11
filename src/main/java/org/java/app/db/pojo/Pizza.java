@@ -32,7 +32,7 @@ public class Pizza {
 	private float prezzo;
 	
 	@OneToMany(mappedBy = "pizza")
-	private List<Offerta> offerta;
+	private List<Offerta> offerte;
 	
 	public Pizza() {}
 	
@@ -83,12 +83,12 @@ public class Pizza {
 		this.prezzo = prezzo;
 	}
 	
-	public List<Offerta> getOfferta() {
-		return offerta;
+	public List<Offerta> getOfferte() {
+		return offerte;
 	}
 
-	public void setOfferta(List<Offerta> offerta) {
-		this.offerta = offerta;
+	public void setOfferte(List<Offerta> offerte) {
+		this.offerte = offerte;
 	}
 
 	@Override
