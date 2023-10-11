@@ -13,11 +13,16 @@
 		<h2 class="py-2">[[*{nome}]]</h2>
 		<span>Prezzo: [[*{prezzo}]] €</span>
 		<span class="py-1">Descrizione: [[*{descrizione}]]</span>
-		<img th:src="@{*{foto}}<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>">
+		<img th:src="@{*{foto}}" th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+		
+		<h4 class="py-2" th:if="*{offerte.size() > 0}">Offerte!</h4>
+		<span th:each="offerta : *{offerte}" th:object="${offerta}">[[*{titolo}]]</span>
+					
+		<a th:href="@{/offerta/{id} (id = *{id})}" class="btn btn-secondary my-2">Aggiungi nuova offerta</a>
 		
 		<a 
-	  	th:href="@{/}"
-  	  class="mt-3 btn btn-primary">
+	  		th:href="@{/}"
+  	    	class="mt-1 btn btn-primary">
 				HOME
 		</a>
 		

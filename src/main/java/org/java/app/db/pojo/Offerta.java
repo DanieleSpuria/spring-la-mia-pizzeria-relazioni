@@ -2,6 +2,8 @@ package org.java.app.db.pojo;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ public class Offerta {
 	private LocalDate fine;
 
 	@Column(nullable = false)
+	@Length(min = 3)
 	private String titolo;
 	
 	@ManyToOne

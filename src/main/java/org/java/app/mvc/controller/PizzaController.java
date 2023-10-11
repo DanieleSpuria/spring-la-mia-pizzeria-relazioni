@@ -2,8 +2,10 @@ package org.java.app.mvc.controller;
 
 import java.util.List;
 
+import org.java.app.db.pojo.Offerta;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.repo.PizzaRepo;
+import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +28,11 @@ public class PizzaController {
 	@Autowired
 	private PizzaRepo pizzaRepo;
 
+	@Autowired
+	private OffertaService offertaService;
 
-
+	
+	
 	
 	@GetMapping("/")
 	public String index(@RequestParam(required=false) String nome, Model model) {
@@ -41,6 +46,8 @@ public class PizzaController {
 		
 		return "index";
 	}
+	
+	
 	
 
 	@GetMapping("/{id}")
@@ -82,7 +89,6 @@ public class PizzaController {
 
 
 
-
 	@GetMapping("/edit/{id}")
 	public String edit(
 			@PathVariable Integer id,
@@ -119,4 +125,44 @@ public class PizzaController {
 
 			return "redirect:/";
 		}
+	
+	
+	
+	
+	@GetMapping("/offerta/{pizza_id}")
+	public String createOfferta(
+			@PathVariable("pizza_id") int id,
+			Model model) {
+		
+		Pizza pizza = pizzaService.findById(id);
+		Offerta offerta = new Offerta();
+		
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("offerta", offerta);
+		
+		return "create-update-offerta";
+	}
+	
+	
+	@PostMapping("/offerta/{pizza_id}")
+	public String storeOfferta(
+			@Valid @ModelAttribute Offerta offerta,
+			BindingResult bindingResult,
+			@PathVariable("pizza_id") int id,
+			Model model) {
+
+		Pizza pizza = pizzaService.findById(id);
+		
+		if (bindingResult.hasErrors()) {
+			
+			model.addAttribute("pizza", pizza);
+			return "create-update-offerta";
+		}
+		
+		offerta.setPizza(pizza);
+		
+		offertaService.save(offerta);
+		
+		return "redirect:/" + id;
+	}
 }
