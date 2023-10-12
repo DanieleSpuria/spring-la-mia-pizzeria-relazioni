@@ -1,5 +1,6 @@
 package org.java.app.db.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -34,13 +36,17 @@ public class Pizza {
 	@OneToMany(mappedBy = "pizza")
 	private List<Offerta> offerte;
 	
+	@ManyToMany(mappedBy = "pizze")
+	private List<Ingrediente> ingredienti;
+	
 	public Pizza() {}
 	
-	public Pizza(String nome, String descrizione, String foto, float prezzo) {
+	public Pizza(String nome, String descrizione, String foto, float prezzo, Ingrediente... ingredienti) {
 		setNome(nome);
 		setDescrizione(descrizione);
 		setFoto(foto);
 		setPrezzo(prezzo);
+		setIngredienti(Arrays.asList(ingredienti));
 	}
 
 	public int getId() {
@@ -89,6 +95,14 @@ public class Pizza {
 
 	public void setOfferte(List<Offerta> offerte) {
 		this.offerte = offerte;
+	}	
+	
+	public List<Ingrediente> getIngredienti() {
+		return ingredienti;
+	}
+
+	public void setIngredienti(List<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
 	}
 
 	@Override

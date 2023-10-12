@@ -2,8 +2,10 @@ package org.java.app;
 
 import java.time.LocalDate;
 
+import org.java.app.db.pojo.Ingrediente;
 import org.java.app.db.pojo.Offerta;
 import org.java.app.db.pojo.Pizza;
+import org.java.app.db.serv.IngredienteService;
 import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	
 	@Autowired
 	private OffertaService offertaService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -47,5 +52,17 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		offertaService.save(offerta1);
 		offertaService.save(offerta2);
 		offertaService.save(offerta3);
+		
+		Ingrediente ingrediente1 = new Ingrediente("formaggio", pizza1, pizza2, pizza3, pizza4, pizza5);
+		Ingrediente ingrediente2 = new Ingrediente("pomodoro", pizza1, pizza2, pizza4 );
+		Ingrediente ingrediente3 = new Ingrediente("olive", pizza2, pizza5);
+		Ingrediente ingrediente4 = new Ingrediente("basilico", pizza1, pizza4);
+		Ingrediente ingrediente5 = new Ingrediente("salame", pizza3);
+		
+		ingredienteService.save(ingrediente1);
+		ingredienteService.save(ingrediente2);
+		ingredienteService.save(ingrediente3);
+		ingredienteService.save(ingrediente4);
+		ingredienteService.save(ingrediente5);
 	}
 }
