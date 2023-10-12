@@ -72,6 +72,38 @@ public class IngredienteController {
 	
 	
 	
+	@GetMapping("/edit/{id}")
+	public String editIngrediente(
+			@PathVariable Integer id,
+			Model model) {
+		
+		List<Pizza> pizze = pizzaService.findAll();
+		Ingrediente ingrediente = ingredienteService.findById(id);
+		
+		model.addAttribute("pizze", pizze);
+		model.addAttribute("ingrediente", ingrediente);
+		
+		return "create-ingrediente";
+	}
+	
+	
+	@PostMapping("/edit/{id}")
+	public String updateIngrediente(
+			@Valid @ModelAttribute Ingrediente ingrediente,
+			BindingResult bindingResult,
+			Model model) {
+		
+		if (bindingResult.hasErrors())
+			return "create-ingrediente";	
+		
+		ingredienteService.save(ingrediente);
+		
+		return "redirect:/ingredienti";
+	}
+	
+	
+	
+	
 	@PostMapping("/delete/{id}")
 	public String deleteIngrediente(
 			@PathVariable Integer id) {
