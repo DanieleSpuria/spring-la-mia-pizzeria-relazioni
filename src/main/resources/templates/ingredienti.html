@@ -25,10 +25,11 @@
 			>
 				<span class="d-inline">[[*{nome}]]</span>
 				
-				<a
-					th:href="@{#}"
-					class="btn btn-danger ms-2"	
-				>Elimina</a>
+				<form method="post" th:action="@{/ingredienti/delete/{id} (id = *{id})}">
+					<button
+						class="btn btn-danger ms-2"	
+					>Elimina</button>
+				</form>
 			</li>
 		</ul>
 		

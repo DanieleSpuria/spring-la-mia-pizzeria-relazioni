@@ -24,4 +24,8 @@ public class IngredienteService {
 	public Ingrediente findById(int id) {
 		return ingredienteRepo.findById(id).get();
 	}
+	
+	public void deleteById(int id) {
+		ingredienteRepo.deleteById(id);
+	}
 }
